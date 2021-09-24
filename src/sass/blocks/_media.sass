@@ -19,6 +19,19 @@
         .title
             &__consultation
                 font-size: 30px
+    .carousel
+        .prev
+            display: none
+        .next
+            display: none
+        img
+            width: 100%
+         
+    .catalog
+        &__content
+            padding: 0 50px
+    .feedback
+        padding: 0 10px
 @media (max-width: 575px)
     .header
         flex-direction: column
@@ -47,6 +60,8 @@
     .button
         &_main
         margin-top: 40px
+    .feed-form
+        width: 85%
     .advantage
         .title
             font-size: 22px
@@ -58,5 +73,31 @@
         .title
             &__consultation
                 font-size: 20px
+    .catalog
+        .title
+            font-size: 20px
+        &__tabs
+            flex-direction: column
+            margin-top: 30px
+        &__tab
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: 15px
+            height: 37px
+            margin-bottom: 8px
+        &__content
+            margin-top: 30px
+    .feedback
+        .title
+            font-size: 20px
+        &__commit
+            display: block
+        &__logo
+            display: flex
+            justify-content: center
+        &__review
+            margin-top: 15px
+    
     
         
