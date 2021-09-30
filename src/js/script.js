@@ -1,3 +1,20 @@
+const slider = tns({
+  container: '.carousel__inner',
+  items: 1,
+  slideBy: 'page',
+  autoplay: false,
+  controls: false,
+  nav: false
+});
+
+document.querySelector('.prev').addEventListener('click', function () {
+  slider.goTo('prev'); 
+});
+
+document.querySelector('.next').addEventListener('click', function () {
+  slider.goTo('next'); 
+});
+
 $(document).ready(function(){
     /* $('.carousel__inner').slick({
         speed: 300,
@@ -48,21 +65,97 @@ $(document).ready(function(){
 
       toggleSlide('.catalog-item__link');
       toggleSlide('.catalog-item__back');
+
+      $('[data-modal=consultation]').on('click', function() {
+        $('.overlay, #consultation').fadeIn(500);
+      });
+      $('.button_mini').on('click', function() {
+        $('.overlay, #order').fadeIn(500);
+      });
+      $('[data-modal=thanks]').on('click', function() {
+        $('.overlay, #thanks').fadeIn(500);
+      });
+      $('.modal__close').on('click', function() {
+        $('.overlay, #consultation, #order, #thanks').fadeOut(500);
+      });
+      
+      $('.button_mini').each(function (i) {
+        $(this).on('click', function () {
+          $('#order .modal__descr').text($('.catalog-item__subtitle').eq(i).text());
+          
+          $('.button_mini').on('click', function() {
+            $('.overlay, #order').fadeIn(500);
+          });
+        });
+      });
+
+
+      function validateForms (form) {
+        $(form).validate({
+          rules: {
+            name: {
+              required: true,
+              minlength: 2
+            },
+            phone: "required",
+            email: {
+              required: true,
+              email: true
+            }
+          },
+          messages: {
+            name: {
+              required: "Пожалуйста, веедите свое имя",
+              minlength: jQuery.validator.format("Введите {0} символа!")
+            },
+            phone: "Пожалуйста, введите свой номер телефона",
+            email: {
+              required: "Пожалуйста, введите свой E-mail",
+              email: "Указан не верный формат электронной почты"
+            }
+          }
+        });
+      };
+      validateForms('#consultation-form');
+      validateForms('#consultation form');
+      validateForms('#order form');
+
+      $('input[name=phone]').mask("+7 (999) 999-99-99");
+
+      $('form').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: "mailer/smart.php",
+          data: $(this).serialize()
+        }).done(function () {
+          $(this).find("input").val("");
+          $('#consultation, #order').fadeOut();
+          $('.ovelay, #thanks').fadeIn(600);
+
+          $('form').trigger('reset');
+        });
+        return false;
+      });
+
+      //Smooth scroll and page Up
+
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 1600 ) {
+          $('.pageUp').fadeIn();
+        } else {
+          $('.pageUp').fadeOut();
+        }
+      });
+
+      // Плавный скроллинг
+      $("a[href=#up]").click(function () {
+        const _href = $(this).attr("href");
+        $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
+        return false;
+      });
+
+      new WOW().init();
+
   });
 
-  const slider = tns({
-    container: '.carousel__inner',
-    items: 1,
-    slideBy: 'page',
-    autoplay: false,
-    controls: false,
-    nav: false
-  });
-
-  document.querySelector('.prev').addEventListener('click', function () {
-    slider.goTo('prev'); 
-  });
-
-  document.querySelector('.next').addEventListener('click', function () {
-    slider.goTo('next'); 
-  });

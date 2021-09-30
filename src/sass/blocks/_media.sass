@@ -32,6 +32,8 @@
             padding: 0 50px
     .feedback
         padding: 0 10px
+
+
 @media (max-width: 575px)
     .header
         flex-direction: column
@@ -57,6 +59,8 @@
         &__icons
             margin-top: 15px
             width: 300px
+        &__icon
+            width: 95px
     .button
         &_main
         margin-top: 40px
@@ -66,6 +70,12 @@
         .title
             font-size: 22px
             text-align: center
+        &__img
+            &_heart
+                padding-top: 10px
+                animation: heartbeat_min 2s ease infinite
+                &:hover
+                    animation-play-state: paused
     .consultation
         padding: 30px 10px
         &__descr
@@ -98,6 +108,24 @@
             justify-content: center
         &__review
             margin-top: 15px
-    
-    
-        
+    .footer
+        &__info
+            width: 100%
+    .modal
+        width: 310px
+        min-height: 300px
+        &__close
+            right: 2px
+            top: 4px
+            font-size: 40px
+            border: 1px solid #000
+            border-radius: 30%
+        &_mini      
+            width: 85%
+            min-height: 20%
+        .feed-form
+            width: 100%
+            input
+                height: 40px
+            button
+                margin-top: 0
